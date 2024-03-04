@@ -4,7 +4,7 @@ import { MemberType as PrismaMemberType } from '@prisma/client';
 import { MemberType, MemberTypeIdFromRest } from '../types/memberType.js';
 
 
-export const getMember = {
+export const memberQuery = {
   memberType: {
     type: MemberType as GraphQLObjectType,
     args: {

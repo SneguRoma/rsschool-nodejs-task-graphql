@@ -2,13 +2,13 @@ import { UserType } from '../types/userType.js';
 import { Context } from '../types/context.js';
 import { UUIDType } from '../types/uuid.js';
 import { User } from '@prisma/client';
-import { GraphQLObjectType, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLList, GraphQLNonNull } from 'graphql';
 
 export const userQuery = {
   user: {
     type: UserType as GraphQLObjectType,
     args: {
-      id: { type: UUIDType },
+      id:{ type: new GraphQLNonNull(UUIDType) },
     },
     resolve: async (_: unknown, { id }: User, { prisma }: Context) =>    {
         const userType = await prisma.user.findFirst({
