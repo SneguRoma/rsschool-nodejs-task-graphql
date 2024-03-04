@@ -45,14 +45,10 @@ export const ProfileMutation = {
     deleteProfile: {
         type: UUIDType,
         args: {id: {type:UUIDType }},
-        resolve: async (_parent: unknown, {id}:{id:string},{ prisma }: Context) =>{
-
-            try {
-                await prisma.profile.delete({ where: { id } });
-              } catch {
-                return false;
-              }
-              return true;
+        resolve: async (_parent: unknown, {id}:{id:string},{ prisma }: Context) =>{           
+              await prisma.profile.delete({ where: { id } });
+              return id;
+  
         },
     }
 

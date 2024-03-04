@@ -42,12 +42,9 @@ export const PostMutation = {
       type: UUIDType,
       args: {id: {type: UUIDType }},
       resolve: async (__: unknown, {id}:{id:string},{ prisma }: Context) =>{
-        try {
-            await prisma.post.delete({ where: { id } });
-          } catch {
-            return false;
-          }
-          return true;
+        
+          await prisma.post.delete({ where: { id } })
+        return id;
         
       },
     }

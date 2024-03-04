@@ -1,4 +1,4 @@
-import {  GraphQLObjectType } from "graphql";
+import {  GraphQLBoolean, GraphQLObjectType } from "graphql";
 import { Context } from "../types/context.js";
 import { UUIDType } from '../types/uuid.js';
 import { UserType } from "../types/userType.js";
@@ -46,13 +46,9 @@ export const UserMutation = {
         args:{
             id: {type: UUIDType},
         },
-        resolve: async (__: unknown, { id }: { id: string }, { prisma }: Context) => {
-          try {
-            await prisma.user.delete({ where: { id } });
-          } catch {
-            return false;
-          }
-          return true;        
+        resolve: async (__: unknown, { id }: { id: string }, { prisma }: Context) => {          
+          await prisma.user.delete({where: {id} })
+            return id;   
         }
     },
     subscribeTo: {
@@ -73,7 +69,7 @@ export const UserMutation = {
         },
       },
     unsubscribeFrom: {
-        type: UUIDType,
+        type: GraphQLBoolean,
         args: {
           userId: { type: UUIDType },
           authorId: { type: UUIDType },
